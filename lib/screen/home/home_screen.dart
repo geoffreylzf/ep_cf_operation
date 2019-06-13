@@ -4,6 +4,7 @@ import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_mortality_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_weight_bloc.dart';
+import 'package:ep_cf_operation/screen/home/widget/feed_dashboard.dart';
 import 'package:ep_cf_operation/screen/home/widget/mortality_dashboard.dart';
 import 'package:ep_cf_operation/screen/home/widget/weight_dashboard.dart';
 import 'package:ep_cf_operation/screen/upload/upload_screen.dart';
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           children: [
             MortalityDashboard(),
             WeightDashboard(),
-            Container(),
+            FeedDashboard(),
           ],
         ),
         bottomNavigationBar: BottomBar(),

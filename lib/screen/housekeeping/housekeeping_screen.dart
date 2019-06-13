@@ -1,8 +1,6 @@
-import 'package:ep_cf_operation/bloc/local_bloc.dart';
 import 'package:ep_cf_operation/mixin/simple_alert_dialog_mixin.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/housekeeping/housekeeping_bloc.dart';
-import 'package:ep_cf_operation/widget/local_check_box.dart';
 import 'package:ep_cf_operation/widget/simple_loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,10 +21,6 @@ class _HousekeepingScreenState extends State<HousekeepingScreen> with SimpleAler
           builder: (_) => HousekeepingBloc(mixin: this),
           dispose: (_, value) => value.dispose(),
         ),
-        Provider<LocalBloc>(
-          builder: (_) => LocalBloc(),
-          dispose: (_, value) => value.dispose(),
-        )
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -70,7 +64,8 @@ class _HkListState extends State<HkList> {
 
     return ListView(
       children: [
-        HkRow("Branch", bloc.branchCountStream),
+        HkRow(Strings.branch, bloc.branchCountStream),
+        HkRow(Strings.feed, bloc.feedCountStream),
       ],
     );
   }
@@ -123,24 +118,15 @@ class _ActionPanelState extends State<ActionPanel> {
   @override
   Widget build(BuildContext context) {
     final hkBloc = Provider.of<HousekeepingBloc>(context);
-    final localBloc = Provider.of<LocalBloc>(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        LocalCheckBox(
-          localBloc: localBloc,
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: RaisedButton.icon(
-            onPressed: () {
-              hkBloc.retrieveAll();
-            },
-            icon: Icon(Icons.cloud_download),
-            label: Text(Strings.retrieveHousekeeping.toUpperCase()),
-          ),
-        ),
-      ],
+    return SizedBox(
+      width: double.infinity,
+      child: RaisedButton.icon(
+        onPressed: () {
+          hkBloc.retrieveAll();
+        },
+        icon: Icon(Icons.cloud_download),
+        label: Text(Strings.retrieveHousekeeping.toUpperCase()),
+      ),
     );
   }
 }

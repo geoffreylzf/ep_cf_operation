@@ -71,6 +71,8 @@ class _LoginFormState extends State<LoginForm> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      autocorrect: false,
                       controller: _usernameTec,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),

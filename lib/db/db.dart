@@ -35,6 +35,11 @@ class Db {
         await db.execute(DbSql.createTempCfWeightDetailTable);
         await db.execute(DbSql.createCfWeightTable);
         await db.execute(DbSql.createCfWeightDetailTable);
+
+        await db.execute(DbSql.createFeedTable);
+        await db.execute(DbSql.createTempCfFeedInDetailTable);
+        await db.execute(DbSql.createCfFeedInTable);
+        await db.execute(DbSql.createCfFeedInDetailTable);
       },
     );
   }

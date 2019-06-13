@@ -2,6 +2,7 @@ import 'package:ep_cf_operation/model/auth.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
 import 'package:ep_cf_operation/model/table/cf_mortality.dart';
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
+import 'package:ep_cf_operation/model/table/feed.dart';
 import 'package:ep_cf_operation/model/upload_result.dart';
 
 class ApiResponse<T> {
@@ -19,6 +20,8 @@ class ApiResponse<T> {
       result = UploadResult.fromJson(json['result']);
     } else if (T.toString() == "List<Branch>") {
       result = List<Branch>.from(json["result"].map((x) => Branch.fromJson(x)));
+    } else if (T.toString() == "List<Feed>") {
+      result = List<Feed>.from(json["result"].map((x) => Feed.fromJson(x)));
     } else if (T.toString() == "List<CfMortality>") {
       result = List<CfMortality>.from(json["result"].map((x) => CfMortality.fromJson(x)));
     } else if (T.toString() == "List<CfWeight>") {

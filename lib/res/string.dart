@@ -7,8 +7,11 @@ class Strings {
   static const newBodyWeightDetail = "New Body Weight Detail";
   static const bodyWeight = "Body Weight";
   static const bodyWeightView = "Body Weight View";
+  static const newFeedIn = "New Feed In";
+  static const newFeedInDetail = "New Feed In Detail";
   static const dead = "Dead";
   static const gender = "Gender";
+  static const truckNo = "Truck No";
   static const male = "Male";
   static const female = "Female";
   static const section = "Section";
@@ -16,6 +19,8 @@ class Strings {
   static const weightGram = "Weight (Gram)";
   static const weight = "Weight";
   static const history = "History";
+  static const branch = "Branch";
+  static const feed = "Feed";
   static const day = "Day";
   static const upload = "Upload";
   static const recordDate = "Record Date";
@@ -24,6 +29,7 @@ class Strings {
   static const houseNo = "House No";
   static const reject = "Reject";
   static const save = "Save";
+  static const scan = "Scan";
   static const search = "Search";
   static const delete = "Delete";
   static const enter = "Enter";
@@ -47,6 +53,7 @@ class Strings {
   static const password = "Password";
 
   static const msgCannotBlank = "Cannot blank";
+  static const msgInvalidFormat = "Invalid Format";
   static const msgNumberOnly = "Number only";
   static const msgFilterMortalityHistory = "Filter Mortality History";
   static const msgFilterBodyWeightHistory = "Filter Body Weight History";

@@ -5,6 +5,7 @@ import 'package:ep_cf_operation/model/auth.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
 import 'package:ep_cf_operation/model/table/cf_mortality.dart';
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
+import 'package:ep_cf_operation/model/table/feed.dart';
 import 'package:ep_cf_operation/model/upload_body.dart';
 import 'package:ep_cf_operation/model/upload_result.dart';
 import 'package:ep_cf_operation/model/user.dart';
@@ -59,6 +60,17 @@ class ApiModule {
 
     final response = await http.get(
       await constructUrl(_housekeepingModule) + "&type=branch",
+      headers: {'authorization': basicAuth},
+    );
+    return ApiResponse.fromJson(jsonDecode(validateResponse(response)));
+  }
+
+  Future<ApiResponse<List<Feed>>> getFeed() async {
+    final user = await SharedPreferencesModule().getUser();
+    String basicAuth = user.getCredential();
+
+    final response = await http.get(
+      await constructUrl(_housekeepingModule) + "&type=feed",
       headers: {'authorization': basicAuth},
     );
     return ApiResponse.fromJson(jsonDecode(validateResponse(response)));

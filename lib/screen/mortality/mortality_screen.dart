@@ -23,11 +23,7 @@ class _MortalityScreenState extends State<MortalityScreen> with SimpleAlertDialo
       builder: (_) => MortalityBloc(mixin: this),
       dispose: (_, value) => value.dispose(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            Strings.mortality,
-          ),
-        ),
+        appBar: AppBar(title: Text(Strings.mortality)),
         body: MortalityEntry(),
       ),
     );

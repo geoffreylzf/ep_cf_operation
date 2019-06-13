@@ -7,7 +7,9 @@ import 'package:ep_cf_operation/screen/weight_history/weight_history_screen.dart
 import 'package:ep_cf_operation/widget/card_label_small.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/pro'
+    'vider.dart';
 
 class WeightDashboard extends StatefulWidget {
   @override
@@ -19,18 +21,28 @@ class _WeightDashboardState extends State<WeightDashboard> {
   Widget build(BuildContext context) {
     final bloc = Provider.of<HomeWeightBloc>(context);
     bloc.loadCurrentMortalityList();
-    return ListView(
+    return Stack(
       children: [
-        WeightCard(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: RaisedButton.icon(
-            icon: Icon(Icons.history),
-            label: Text(Strings.history),
-            onPressed: () {
-              Navigator.pushNamed(context, WeightHistoryScreen.route);
-            },
+        Center(
+          child: Opacity(
+            opacity: 0.1,
+            child: Icon(FontAwesomeIcons.weight, size: 250),
           ),
+        ),
+        ListView(
+          children: [
+            WeightCard(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: RaisedButton.icon(
+                icon: Icon(Icons.history),
+                label: Text(Strings.history),
+                onPressed: () {
+                  Navigator.pushNamed(context, WeightHistoryScreen.route);
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );

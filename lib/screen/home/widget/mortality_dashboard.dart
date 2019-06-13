@@ -7,6 +7,7 @@ import 'package:ep_cf_operation/screen/mortality_history/mortality_history_scree
 import 'package:ep_cf_operation/widget/card_label_small.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class MortalityDashboard extends StatefulWidget {
@@ -19,21 +20,31 @@ class _MortalityDashboardState extends State<MortalityDashboard> {
   Widget build(BuildContext context) {
     final bloc = Provider.of<HomeMortalityBloc>(context);
     bloc.loadCurrentMortalityList();
-    return ListView(
+    return Stack(
       children: [
-        MortalityCard(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: RaisedButton.icon(
-            icon: Icon(Icons.history),
-            label: Text(Strings.history),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                MortalityHistoryScreen.route,
-              );
-            },
+        Center(
+          child: Opacity(
+            opacity: 0.1,
+            child: Icon(FontAwesomeIcons.skullCrossbones, size: 250),
           ),
+        ),
+        ListView(
+          children: [
+            MortalityCard(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: RaisedButton.icon(
+                icon: Icon(Icons.history),
+                label: Text(Strings.history),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    MortalityHistoryScreen.route,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );

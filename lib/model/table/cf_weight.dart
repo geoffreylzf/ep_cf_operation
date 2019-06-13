@@ -24,10 +24,7 @@ class CfWeight extends BaseModel {
     isUpload,
     this.timestamp,
     this.cfWeightDetailList,
-  }) : super(
-          isUpload: isUpload,
-          isDelete: isDelete,
-        );
+  }) : super(isUpload: isUpload, isDelete: isDelete);
 
   CfWeight.db({
     @required this.companyId,

@@ -1,14 +1,17 @@
 class UploadResult {
   final List<PairId> cfMortalityPairIdList;
   final List<PairId> cfWeightPairIdList;
+  final List<PairId> cfFeedInPairIdList;
 
-  UploadResult({this.cfMortalityPairIdList, this.cfWeightPairIdList});
+  UploadResult({this.cfMortalityPairIdList, this.cfWeightPairIdList, this.cfFeedInPairIdList});
 
   factory UploadResult.fromJson(Map<String, dynamic> json) => UploadResult(
         cfMortalityPairIdList:
             List<PairId>.from(json["cf_mortality_pair_id_list"].map((x) => PairId.fromJson(x))),
         cfWeightPairIdList:
             List<PairId>.from(json["cf_weight_pair_id_list"].map((x) => PairId.fromJson(x))),
+        cfFeedInPairIdList:
+            List<PairId>.from(json["cf_feed_in_pair_id_list"].map((x) => PairId.fromJson(x))),
       );
 }
 

@@ -2,6 +2,8 @@ import 'package:ep_cf_operation/model/table/cf_weight.dart';
 import 'package:ep_cf_operation/screen/company/company_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in/feed_in_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in_detail/feed_in_detail_screen.dart';
+import 'package:ep_cf_operation/screen/feed_in_history/feed_in_history_screen.dart';
+import 'package:ep_cf_operation/screen/feed_in_view/feed_in_view_screen.dart';
 import 'package:ep_cf_operation/screen/home/home_screen.dart';
 import 'package:ep_cf_operation/screen/housekeeping/housekeeping_screen.dart';
 import 'package:ep_cf_operation/screen/location/location_screen.dart';
@@ -62,6 +64,12 @@ class MyApp extends StatelessWidget {
         FeedInDetailScreen.route: (ctx) {
           final arguments = ModalRoute.of(ctx).settings.arguments as FeedInDetailScreenArguments;
           return FeedInDetailScreen(arguments);
+        },
+        FeedInHistoryScreen.route: (ctx) => FeedInHistoryScreen(),
+
+        FeedInViewScreen.route: (ctx) {
+          final cfFeedInId = ModalRoute.of(ctx).settings.arguments as int;
+          return FeedInViewScreen(cfFeedInId);
         },
       },
     );

@@ -86,11 +86,10 @@ class MortalityRepository {
   }
 
   Future<List<CfMortality>> getNoUpload() async {
-    var list = await CfMortalityDao().searchList(
+    return await CfMortalityDao().searchList(
       isUpload: 0,
       isDelete: null,
     );
-    return list;
   }
 
   Future<void> updateStatusAfterUpload(List<PairId> cfMortalityPairIdList) async {

@@ -50,6 +50,7 @@ class FeedInBloc extends BlocBase {
     try {
       String barcode = await BarcodeScanner.scan();
       final feedInQr = FeedInQr(barcode);
+      await feedInQr.loadFeedItemData();
       _feedInQrSubject.add(feedInQr);
       return feedInQr;
     } on PlatformException catch (e) {

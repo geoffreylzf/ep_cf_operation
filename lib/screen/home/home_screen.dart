@@ -2,6 +2,7 @@ import 'package:ep_cf_operation/model/table/branch.dart';
 import 'package:ep_cf_operation/res/nav.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_bloc.dart';
+import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_mortality_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_weight_bloc.dart';
 import 'package:ep_cf_operation/screen/home/widget/feed_dashboard.dart';
@@ -32,13 +33,20 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<HomeBloc>(builder: (_) => HomeBloc(), dispose: (_, value) => value.dispose()),
+        Provider<HomeBloc>(
+          builder: (_) => HomeBloc(),
+          dispose: (_, value) => value.dispose(),
+        ),
         Provider<HomeMortalityBloc>(
           builder: (_) => HomeMortalityBloc(),
           dispose: (_, value) => value.dispose(),
         ),
         Provider<HomeWeightBloc>(
           builder: (_) => HomeWeightBloc(),
+          dispose: (_, value) => value.dispose(),
+        ),
+        Provider<HomeFeedBloc>(
+          builder: (_) => HomeFeedBloc(),
           dispose: (_, value) => value.dispose(),
         ),
       ],

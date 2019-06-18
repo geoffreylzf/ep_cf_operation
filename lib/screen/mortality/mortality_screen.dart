@@ -37,12 +37,13 @@ class MortalityEntry extends StatefulWidget {
 
 class _MortalityEntryState extends State<MortalityEntry> {
   final _formKey = GlobalKey<FormState>();
+  final dateFormat = DateFormat('yyyy-MM-dd');
+  final dateTec = TextEditingController();
+  final houseTec = TextEditingController();
+  final mortalityTec = TextEditingController();
+  final rejectTec = TextEditingController();
+
   var recordDate = DateTime.now();
-  var dateFormat = DateFormat('yyyy-MM-dd');
-  var dateTec = TextEditingController();
-  var houseTec = TextEditingController();
-  var mortalityTec = TextEditingController();
-  var rejectTec = TextEditingController();
 
   @override
   void initState() {

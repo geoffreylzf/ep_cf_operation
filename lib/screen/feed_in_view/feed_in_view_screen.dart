@@ -1,36 +1,37 @@
-import 'package:ep_cf_operation/model/table/cf_weight.dart';
-import 'package:ep_cf_operation/model/table/cf_weight_detail.dart';
+import 'package:ep_cf_operation/db/dao/cf_feed_in_detail_dao.dart';
+import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
+import 'package:ep_cf_operation/model/table/cf_feed_in_detail.dart';
 import 'package:ep_cf_operation/res/string.dart';
-import 'package:ep_cf_operation/screen/weight_view/weight_view_bloc.dart';
+import 'package:ep_cf_operation/screen/feed_in_view/feed_in_view_bloc.dart';
 import 'package:ep_cf_operation/util/date_time_util.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:ep_cf_operation/widget/simple_confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WeightViewScreen extends StatefulWidget {
-  static const String route = '/weightView';
+class FeedInViewScreen extends StatefulWidget {
+  static const String route = '/feedInView';
 
-  final int cfWeightId;
+  final int cfFeedInId;
 
-  WeightViewScreen(this.cfWeightId);
+  FeedInViewScreen(this.cfFeedInId);
 
   @override
-  _WeightViewScreenState createState() => _WeightViewScreenState();
+  _FeedInViewScreenState createState() => _FeedInViewScreenState();
 }
 
-class _WeightViewScreenState extends State<WeightViewScreen> {
-  WeightViewBloc bloc;
+class _FeedInViewScreenState extends State<FeedInViewScreen> {
+  FeedInViewBloc bloc;
 
   @override
   void initState() {
     super.initState();
-    bloc = WeightViewBloc(cfWeightId: widget.cfWeightId);
+    bloc = FeedInViewBloc(cfFeedInId: widget.cfFeedInId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Provider<WeightViewBloc>(
+    return Provider<FeedInViewBloc>(
       builder: (_) => bloc,
       dispose: (_, value) => value.dispose(),
       child: Scaffold(
@@ -66,11 +67,11 @@ class _WeightViewScreenState extends State<WeightViewScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final cfWeight = bloc.getCfWeight();
+        final cfFeedIn = bloc.getCfFeedIn();
         final dayDif =
-            DateTime.now().difference(DateTimeUtil().getDate(cfWeight.recordDate)).inDays;
+            DateTime.now().difference(DateTimeUtil().getDate(cfFeedIn.recordDate)).inDays;
 
-        if (cfWeight.isDeleted()) {
+        if (cfFeedIn.isDeleted()) {
           return SimpleAlertDialog(
             title: Strings.error,
             message: "Data already deleted",
@@ -86,7 +87,7 @@ class _WeightViewScreenState extends State<WeightViewScreen> {
             message: "Delete will be completed after upload",
             btnPositiveText: Strings.delete,
             vcb: () {
-              bloc.deleteCfWeight();
+              bloc.deleteCfFeedIn();
             },
           );
         }
@@ -103,23 +104,21 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<WeightViewBloc>(context);
-    return StreamBuilder<CfWeight>(
-        stream: bloc.cfWeightStream,
+    final bloc = Provider.of<FeedInViewBloc>(context);
+    return StreamBuilder<CfFeedIn>(
+        stream: bloc.cfFeedInStream,
         builder: (context, snapshot) {
-          var houseNo = "";
-          var day = "";
           var date = "";
-          var time = "";
+          var docNo = "";
+          var truckNo = "";
           var isDeleted = false;
 
           if (snapshot.hasData) {
-            final cfWeight = snapshot.data;
-            houseNo = cfWeight.houseNo.toString();
-            day = cfWeight.day.toString();
-            date = cfWeight.recordDate;
-            time = cfWeight.recordTime;
-            isDeleted = cfWeight.isDeleted();
+            final cfFeedIn = snapshot.data;
+            date = cfFeedIn.recordDate;
+            docNo = cfFeedIn.docNo;
+            truckNo = cfFeedIn.truckNo;
+            isDeleted = cfFeedIn.isDeleted();
           }
           return Padding(
             padding: const EdgeInsets.all(4.0),
@@ -128,15 +127,14 @@ class _HeaderState extends State<Header> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("House : $houseNo", style: TextStyle(fontSize: 12)),
-                    Text("Day : $day", style: TextStyle(fontSize: 12)),
+                    Text("Date : $date", style: TextStyle(fontSize: 12)),
+                    Text("Doc No : $docNo", style: TextStyle(fontSize: 12)),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("Date : $date", style: TextStyle(fontSize: 12)),
-                    Text("Time : $time", style: TextStyle(fontSize: 12)),
+                    Text("Truck No : $truckNo", style: TextStyle(fontSize: 12)),
                     if (isDeleted) Text("(Deleted)"),
                   ],
                 ),
@@ -155,7 +153,7 @@ class Info extends StatefulWidget {
 class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<WeightViewBloc>(context);
+    final bloc = Provider.of<FeedInViewBloc>(context);
     return Column(
       children: [
         Container(
@@ -165,17 +163,17 @@ class _InfoState extends State<Info> {
             child: Row(
               children: [
                 Expanded(flex: 1, child: ListHeader("#")),
-                Expanded(flex: 2, child: ListHeader(Strings.section)),
-                Expanded(flex: 2, child: ListHeader(Strings.gender)),
-                Expanded(flex: 2, child: ListHeader(Strings.quantity)),
-                Expanded(flex: 3, child: ListHeader(Strings.weightGram)),
+                Expanded(flex: 1, child: ListHeader(Strings.house_short)),
+                Expanded(flex: 3, child: ListHeader(Strings.feed)),
+                Expanded(flex: 1, child: ListHeader(Strings.compartment_short)),
+                Expanded(flex: 2, child: ListHeader(Strings.weight)),
               ],
             ),
           ),
         ),
         Expanded(
-          child: StreamBuilder<List<CfWeightDetail>>(
-            stream: bloc.cfWeightDetailListStream,
+          child: StreamBuilder<List<CfFeedInDetailWithInfo>>(
+            stream: bloc.cfFeedInDetailListStream,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -199,17 +197,39 @@ class _InfoState extends State<Info> {
                       child: Row(
                         children: [
                           Expanded(
-                              flex: 1, child: Text(no.toString(), textAlign: TextAlign.center)),
+                              flex: 1,
+                              child: Text(
+                                no.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 12),
+                              )),
                           Expanded(
-                              flex: 2,
-                              child: Text(temp.section.toString(), textAlign: TextAlign.center)),
-                          Expanded(flex: 2, child: Text(temp.gender, textAlign: TextAlign.center)),
-                          Expanded(
-                              flex: 2,
-                              child: Text(temp.qty.toString(), textAlign: TextAlign.center)),
+                              flex: 1,
+                              child: Text(
+                                temp.houseNo.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 12),
+                              )),
                           Expanded(
                               flex: 3,
-                              child: Text(temp.weight.toString(), textAlign: TextAlign.center)),
+                              child: Text(
+                                temp.skuName ?? "ITEM ID : ${temp.itemPackingId}",
+                                style: TextStyle(fontSize: 10),
+                              )),
+                          Expanded(
+                              flex: 1,
+                              child: Text(
+                                temp.compartmentNo ?? "",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 12),
+                              )),
+                          Expanded(
+                              flex: 2,
+                              child: Text(
+                                temp.weight.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 12),
+                              )),
                         ],
                       ),
                     ),

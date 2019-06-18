@@ -32,7 +32,7 @@ class WeightRepository {
       isDelete: null,
     );
 
-    await Future.forEach(list, (cfWeight) async {
+    await Future.forEach<CfWeight>(list, (cfWeight) async {
       await cfWeight.loadDetailList();
     });
 
@@ -70,8 +70,9 @@ class WeightRepository {
 
   Future<void> deleteById(int id) async {
     final cfMortality = await CfWeightDao().getById(id);
-    cfMortality.isDelete = 1;
-    cfMortality.isUpload = 0;
+    cfMortality
+      ..isDelete = 1
+      ..isUpload = 0;
     await CfWeightDao().update(cfMortality);
   }
 

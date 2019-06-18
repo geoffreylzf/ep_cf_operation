@@ -83,6 +83,7 @@ class _UploadListState extends State<UploadList> {
       children: [
         UploadCountRow(FontAwesomeIcons.skullCrossbones, Strings.mortality, bloc.mortalityCountStream),
         UploadCountRow(FontAwesomeIcons.weight, Strings.bodyWeight, bloc.weightCountStream),
+        UploadCountRow(FontAwesomeIcons.seedling, Strings.feed, bloc.feedInCountStream),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:ep_cf_operation/db/dao/cf_feed_in_detail_dao.dart';
 import 'package:ep_cf_operation/model/table/base_model.dart';
 import 'package:ep_cf_operation/model/table/cf_feed_in_detail.dart';
 import 'package:ep_cf_operation/util/date_time_util.dart';
@@ -81,5 +82,9 @@ class CfFeedIn extends BaseModel {
 
   Map<String, dynamic> toDbJson() {
     return toJson()..remove("cf_feed_in_detail_list");
+  }
+
+  loadDetailList() async {
+    cfFeedInDetailList = await CfFeedInDetailDao().getListByCfFeedInId(id);
   }
 }

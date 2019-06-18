@@ -96,7 +96,7 @@ class DbSql {
   static final createCfFeedInDetailTable = """
       CREATE TABLE `cf_feed_in_detail` (
       `id` INTEGER PRIMARY KEY,
-      `cf_feed_id` INTEGER,
+      `cf_feed_in_id` INTEGER,
       `doc_detail_id` INTEGER,
       `house_no` INTEGER,
       `item_packing_id` INTEGER,

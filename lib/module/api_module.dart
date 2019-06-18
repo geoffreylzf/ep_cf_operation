@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ep_cf_operation/model/api_response.dart';
 import 'package:ep_cf_operation/model/auth.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
+import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
 import 'package:ep_cf_operation/model/table/cf_mortality.dart';
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
 import 'package:ep_cf_operation/model/table/feed.dart';
@@ -127,6 +128,25 @@ class ApiModule {
       body: jsonEncode(uploadBody.toJson()),
     );
 
+    return ApiResponse.fromJson(jsonDecode(validateResponse(response)));
+  }
+
+  Future<ApiResponse<List<CfFeedIn>>> getCfFeedInList(
+      int companyId,
+      int locationId,
+      int batch,
+      ) async {
+    final user = await SharedPreferencesModule().getUser();
+    String basicAuth = user.getCredential();
+
+    final response = await http.get(
+      await constructUrl(_historyModule) +
+          "&type=feedIn" +
+          "&company_id=$companyId" +
+          "&location_id=$locationId" +
+          "&batch=$batch",
+      headers: {'authorization': basicAuth},
+    );
     return ApiResponse.fromJson(jsonDecode(validateResponse(response)));
   }
 }

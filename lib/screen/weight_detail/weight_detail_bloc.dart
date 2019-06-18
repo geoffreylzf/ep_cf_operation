@@ -118,6 +118,6 @@ class WeightDetailBloc extends BlocBase {
       await CfWeightDetailDao().insert(detail);
     });
 
-    await TempCfWeightDetailDao().deleteAll();
+    await TempCfWeightDetailDao().removeAll();
   }
 }

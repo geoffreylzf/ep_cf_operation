@@ -7,8 +7,14 @@ class Strings {
   static const newBodyWeightDetail = "New Body Weight Detail";
   static const bodyWeight = "Body Weight";
   static const bodyWeightView = "Body Weight View";
+  static const feedInHistory = "Feed In History";
   static const newFeedIn = "New Feed In";
   static const newFeedInDetail = "New Feed In Detail";
+  static const docNo = "Doc No";
+  static const feedItem = "Feed Item";
+  static const compartment = "Compartment";
+  static const compartment_short = "C#";
+  static const house_short = "H#";
   static const dead = "Dead";
   static const gender = "Gender";
   static const truckNo = "Truck No";
@@ -16,8 +22,10 @@ class Strings {
   static const female = "Female";
   static const section = "Section";
   static const quantity = "Quantity";
-  static const weightGram = "Weight (Gram)";
+  static const qty = "Qty";
   static const weight = "Weight";
+  static const weightKg = "Weight (Kg)";
+  static const weightGram = "Weight (Gram)";
   static const history = "History";
   static const branch = "Branch";
   static const feed = "Feed";
@@ -29,6 +37,7 @@ class Strings {
   static const houseNo = "House No";
   static const reject = "Reject";
   static const save = "Save";
+  static const insert = "Insert";
   static const scan = "Scan";
   static const search = "Search";
   static const delete = "Delete";
@@ -57,6 +66,7 @@ class Strings {
   static const msgNumberOnly = "Number only";
   static const msgFilterMortalityHistory = "Filter Mortality History";
   static const msgFilterBodyWeightHistory = "Filter Body Weight History";
+  static const msgFilterFeedInHistory = "Filter Feed In History";
   static const msgSignInWithGoogle = "Sign in with Google";
   static const msgPleaseEnterUsername = "Please enter username";
   static const msgPleaseEnterPassword = "Please enter password";

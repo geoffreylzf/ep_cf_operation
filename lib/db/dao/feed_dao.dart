@@ -33,4 +33,10 @@ class FeedDao {
     var res = await db.insert(_table, feed.toJson());
     return res;
   }
+
+  Future<Feed> getById(int id) async {
+    final db = await Db().database;
+    final res = await db.query(_table, where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Feed.fromJson(res.first) : null;
+  }
 }

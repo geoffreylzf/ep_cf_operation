@@ -62,12 +62,12 @@ class _WeightSummaryState extends State<WeightSummary> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 }
-                var list = snapshot.data;
+                final list = snapshot.data;
                 return ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (ctx, position) {
-                    var no = list.length - position;
-                    var temp = list[position];
+                    final no = list.length - position;
+                    final temp = list[position];
                     var bgColor = Theme.of(ctx).scaffoldBackgroundColor;
 
                     if (no % 2 == 0) {

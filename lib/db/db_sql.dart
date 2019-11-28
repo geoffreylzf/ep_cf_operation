@@ -17,6 +17,7 @@ class DbSql {
       `record_date` TEXT, 
       `m_qty` INTEGER,
       `r_qty` INTEGER,
+      `remark` TEXT,
       `uuid` TEXT,
       `is_delete` INTEGER DEFAULT 0,
       `is_upload` INTEGER DEFAULT 0,
@@ -103,5 +104,14 @@ class DbSql {
       `compartment_no` TEXT,
       `qty` REAL,
       `weight` REAL);
+  """;
+
+  static final createWeighingScheduleTable = """
+      CREATE TABLE `weighing_schedule` (
+      `id` INTEGER PRIMARY KEY,
+      `location_id` INTEGER,
+      `house_no` INTEGER,
+      `day` INTEGER,
+      `weighing_date` TEXT);
   """;
 }

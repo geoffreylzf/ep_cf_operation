@@ -1,6 +1,5 @@
 import 'package:ep_cf_operation/db/dao/cf_feed_in_detail_dao.dart';
 import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
-import 'package:ep_cf_operation/model/table/cf_feed_in_detail.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/feed_in_view/feed_in_view_bloc.dart';
 import 'package:ep_cf_operation/util/date_time_util.dart';

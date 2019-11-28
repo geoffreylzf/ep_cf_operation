@@ -96,7 +96,7 @@ class _WeightEntryState extends State<WeightEntry> {
                 final selectedDate = await showDatePicker(
                   context: context,
                   initialDate: recordDate,
-                  firstDate: DateTime.now().add(Duration(days: -7)),
+                  firstDate: DateTime.now().add(Duration(days: -2)),
                   lastDate: DateTime.now(),
                 );
 
@@ -135,6 +135,7 @@ class _WeightEntryState extends State<WeightEntry> {
                         if (int.tryParse(value) == null) {
                           return Strings.msgNumberOnly;
                         }
+                        return null;
                       },
                     ),
                   ),
@@ -158,6 +159,7 @@ class _WeightEntryState extends State<WeightEntry> {
                         if (int.tryParse(value) == null) {
                           return Strings.msgNumberOnly;
                         }
+                        return null;
                       },
                     ),
                   ),

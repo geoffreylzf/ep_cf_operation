@@ -44,7 +44,8 @@ class MortalityBloc extends BlocBase {
       {@required String recordDate,
       @required int houseNo,
       @required int mQty,
-      @required int rQty}) async {
+      @required int rQty,
+      @required String remark}) async {
     var cfMortality = CfMortality.db(
       companyId: _companyId,
       locationId: _locationId,
@@ -52,6 +53,7 @@ class MortalityBloc extends BlocBase {
       houseNo: houseNo,
       mQty: mQty,
       rQty: rQty,
+      remark: remark
     );
 
     var res = await MortalityRepository().saveCfMortality(cfMortality);

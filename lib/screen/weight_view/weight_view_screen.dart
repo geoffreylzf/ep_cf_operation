@@ -1,5 +1,6 @@
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
 import 'package:ep_cf_operation/model/table/cf_weight_detail.dart';
+import 'package:ep_cf_operation/model/weight_summary.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/weight_view/weight_view_bloc.dart';
 import 'package:ep_cf_operation/util/date_time_util.dart';
@@ -56,6 +57,7 @@ class _WeightViewScreenState extends State<WeightViewScreen> {
           children: [
             Header(),
             Expanded(child: Info()),
+            Summary(),
           ],
         ),
       ),
@@ -235,6 +237,57 @@ class ListHeader extends StatelessWidget {
       text,
       textAlign: TextAlign.center,
       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class Summary extends StatefulWidget {
+  @override
+  _SummaryState createState() => _SummaryState();
+}
+
+class _SummaryState extends State<Summary> {
+  @override
+  Widget build(BuildContext context) {
+    final bloc = Provider.of<WeightViewBloc>(context);
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: StreamBuilder<WeightSummary>(
+          stream: bloc.weightSummaryStream,
+          builder: (context, snapshot) {
+            final data = snapshot.data;
+            if (data == null) {
+              return Container();
+            }
+            return Container(
+              decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+              child: Table(
+                children: [
+                  TableRow(decoration: BoxDecoration(color: Colors.black), children: [
+                    Text(" "),
+                    Text("Ttl Qty",
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                    Text("Ttl Weight",
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                    Text("Avg Weight",
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                  ]),
+                  TableRow(children: [
+                    Text("Male", textAlign: TextAlign.center),
+                    Text(data.maleTtlQty.toString(), textAlign: TextAlign.center),
+                    Text(data.maleTtlWgt.toString(), textAlign: TextAlign.center),
+                    Text(data.maleAvgWgt.toString(), textAlign: TextAlign.center),
+                  ]),
+                  TableRow(children: [
+                    Text("Female", textAlign: TextAlign.center),
+                    Text(data.femaleTtlQty.toString(), textAlign: TextAlign.center),
+                    Text(data.femaleTtlWgt.toString(), textAlign: TextAlign.center),
+                    Text(data.femaleAvgWgt.toString(), textAlign: TextAlign.center),
+                  ]),
+                ],
+              ),
+            );
+          }),
     );
   }
 }

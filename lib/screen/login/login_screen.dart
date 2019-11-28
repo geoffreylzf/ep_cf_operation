@@ -7,7 +7,6 @@ import 'package:ep_cf_operation/widget/local_check_box.dart';
 import 'package:ep_cf_operation/widget/simple_loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String route = '/login';
@@ -63,9 +62,8 @@ class _LoginFormState extends State<LoginForm> {
         child: Container(
           margin: EdgeInsets.all(16),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(height: 24),
               Column(
                 children: [
                   Padding(
@@ -82,6 +80,7 @@ class _LoginFormState extends State<LoginForm> {
                         if (value.isEmpty) {
                           return Strings.msgPleaseEnterUsername;
                         }
+                        return null;
                       },
                     ),
                   ),
@@ -105,20 +104,6 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                     ],
                   ),
-                ],
-              ),
-              Column(
-                children: [
-                  GoogleSignInBtn(),
-                  StreamBuilder<String>(
-                      stream: loginBloc.signedInEmailStream,
-                      builder: (context, snapshot) {
-                        var email = "";
-                        if (snapshot.hasData) {
-                          email = snapshot.data;
-                        }
-                        return Text("Google Account : $email");
-                      }),
                 ],
               ),
             ],
@@ -159,26 +144,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         if (value.isEmpty) {
           return Strings.msgPleaseEnterPassword;
         }
-      },
-    );
-  }
-}
-
-class GoogleSignInBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final _loginBloc = Provider.of<LoginBloc>(context);
-    return StreamBuilder<String>(
-      stream: _loginBloc.textBtnGoogleStream,
-      initialData: Strings.msgSignInWithGoogle,
-      builder: (context, snapshot) {
-        return GoogleSignInButton(
-          darkMode: true,
-          onPressed: () {
-            _loginBloc.onGoogleButtonPressed();
-          },
-          text: snapshot.data,
-        );
+        return null;
       },
     );
   }

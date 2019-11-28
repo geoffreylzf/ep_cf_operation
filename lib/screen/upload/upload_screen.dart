@@ -81,7 +81,7 @@ class _UploadListState extends State<UploadList> {
 
     return ListView(
       children: [
-        UploadCountRow(FontAwesomeIcons.skullCrossbones, Strings.mortality, bloc.mortalityCountStream),
+        UploadCountRow(Icons.clear, Strings.mortality, bloc.mortalityCountStream),
         UploadCountRow(FontAwesomeIcons.weight, Strings.bodyWeight, bloc.weightCountStream),
         UploadCountRow(FontAwesomeIcons.seedling, Strings.feed, bloc.feedInCountStream),
       ],

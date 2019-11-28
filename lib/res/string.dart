@@ -27,6 +27,7 @@ class Strings {
   static const weightKg = "Weight (Kg)";
   static const weightGram = "Weight (Gram)";
   static const history = "History";
+  static const refresh = "Refresh";
   static const branch = "Branch";
   static const feed = "Feed";
   static const day = "Day";
@@ -36,6 +37,7 @@ class Strings {
   static const endDate = "End Date";
   static const houseNo = "House No";
   static const reject = "Reject";
+  static const remark = "Remark";
   static const save = "Save";
   static const insert = "Insert";
   static const scan = "Scan";

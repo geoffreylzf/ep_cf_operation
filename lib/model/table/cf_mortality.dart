@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 
 class CfMortality extends BaseModel {
   int id, sid, companyId, locationId, houseNo, mQty, rQty;
-  String recordDate, uuid, timestamp;
+  String recordDate, remark, uuid, timestamp;
 
   CfMortality({
     this.id,
@@ -16,6 +16,7 @@ class CfMortality extends BaseModel {
     this.houseNo,
     this.mQty,
     this.rQty,
+    this.remark,
     this.uuid,
     isDelete,
     isUpload,
@@ -32,6 +33,7 @@ class CfMortality extends BaseModel {
     @required this.houseNo,
     @required this.mQty,
     @required this.rQty,
+    @required this.remark,
   }) {
     uuid = Uuid().v1();
     timestamp = DateTimeUtil().getCurrentTimestamp();
@@ -46,6 +48,7 @@ class CfMortality extends BaseModel {
         recordDate: json["record_date"],
         mQty: json["m_qty"],
         rQty: json["r_qty"],
+        remark: json["remark"],
         uuid: json["uuid"],
         isUpload: json["is_upload"],
         isDelete: json["is_delete"],
@@ -61,6 +64,7 @@ class CfMortality extends BaseModel {
         "record_date": recordDate,
         "m_qty": mQty,
         "r_qty": rQty,
+        "remark": remark,
         "uuid": uuid,
         "is_upload": isUpload,
         "is_delete": isDelete,

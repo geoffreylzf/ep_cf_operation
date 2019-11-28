@@ -1,3 +1,4 @@
+import 'package:ep_cf_operation/mixin/simple_alert_dialog_mixin.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
 import 'package:ep_cf_operation/res/nav.dart';
 import 'package:ep_cf_operation/res/string.dart';
@@ -20,7 +21,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin, SimpleAlertDialogMixin {
   TabController _tabController;
 
   @override
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           dispose: (_, value) => value.dispose(),
         ),
         Provider<HomeWeightBloc>(
-          builder: (_) => HomeWeightBloc(),
+          builder: (_) => HomeWeightBloc(mixin: this),
           dispose: (_, value) => value.dispose(),
         ),
         Provider<HomeFeedBloc>(
@@ -62,8 +64,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             bottom: TabBar(
               controller: _tabController,
               tabs: [
-                Container(
-                    height: 28, child: Tab(icon: Icon(FontAwesomeIcons.skullCrossbones, size: 16))),
+                Container(height: 28, child: Tab(icon: Icon(Icons.clear, size: 16))),
                 Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.weight, size: 16))),
                 Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.seedling, size: 16))),
               ],

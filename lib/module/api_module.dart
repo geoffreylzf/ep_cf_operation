@@ -7,6 +7,7 @@ import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
 import 'package:ep_cf_operation/model/table/cf_mortality.dart';
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
 import 'package:ep_cf_operation/model/table/feed.dart';
+import 'package:ep_cf_operation/model/table/weighing_schedule.dart';
 import 'package:ep_cf_operation/model/upload_body.dart';
 import 'package:ep_cf_operation/model/upload_result.dart';
 import 'package:ep_cf_operation/model/user.dart';
@@ -23,10 +24,11 @@ class ApiModule {
   static const _globalUrl = "http://epgroup.dlinkddns.com:5030/eperp/index.php?r=";
   static const _localUrl = "http://192.168.8.1:8833/eperp/index.php?r=";
 
-  static const _loginModule = "apiMobileAuth/login";
+  static const _loginModule = "apiMobileAuth/nonGoogleAccLogin";
   static const _housekeepingModule = "apiMobileCfOperation/getHouseKeeping";
   static const _uploadModule = "apiMobileCfOperation/upload";
   static const _historyModule = "apiMobileCfOperation/getHistory";
+  static const _weighingScheduleModule = "apiMobileCfOperation/getWeighingSchedule";
 
   Future<String> constructUrl(String module) async {
     final isLocal = await SharedPreferencesModule().getLocalCheck() ?? false;
@@ -43,13 +45,12 @@ class ApiModule {
     throw Exception('Connection Failed');
   }
 
-  Future<ApiResponse<Auth>> login(String username, String password, String email) async {
+  Future<ApiResponse<Auth>> login(String username, String password) async {
     String basicAuth = User(username, password).getCredential();
 
     final response = await http.post(
       await constructUrl(_loginModule),
       headers: {'authorization': basicAuth},
-      body: {"email": email},
     );
 
     return ApiResponse.fromJson(jsonDecode(validateResponse(response)));
@@ -61,6 +62,17 @@ class ApiModule {
 
     final response = await http.get(
       await constructUrl(_housekeepingModule) + "&type=branch",
+      headers: {'authorization': basicAuth},
+    );
+    return ApiResponse.fromJson(jsonDecode(validateResponse(response)));
+  }
+
+  Future<ApiResponse<List<WeighingSchedule>>> getWeighingSchedule(int locationId) async {
+    final user = await SharedPreferencesModule().getUser();
+    String basicAuth = user.getCredential();
+
+    final response = await http.get(
+      await constructUrl(_weighingScheduleModule) + "&location_id=$locationId",
       headers: {'authorization': basicAuth},
     );
     return ApiResponse.fromJson(jsonDecode(validateResponse(response)));

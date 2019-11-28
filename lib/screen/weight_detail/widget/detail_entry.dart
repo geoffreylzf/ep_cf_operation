@@ -55,6 +55,7 @@ class _DetailEntryState extends State<DetailEntry> {
               if (int.tryParse(value) == null) {
                 return Strings.msgNumberOnly;
               }
+              return null;
             },
           ),
           Padding(
@@ -112,6 +113,7 @@ class _DetailEntryState extends State<DetailEntry> {
               if (int.tryParse(value) == null) {
                 return Strings.msgNumberOnly;
               }
+              return null;
             },
           ),
           Padding(
@@ -132,6 +134,7 @@ class _DetailEntryState extends State<DetailEntry> {
                 if (int.tryParse(value) == null) {
                   return Strings.msgNumberOnly;
                 }
+                return null;
               },
             ),
           ),

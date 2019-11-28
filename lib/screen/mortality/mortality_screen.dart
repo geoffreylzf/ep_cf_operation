@@ -1,6 +1,5 @@
 import 'package:ep_cf_operation/mixin/simple_alert_dialog_mixin.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
-import 'package:ep_cf_operation/repository/mortality_repository.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/mortality/mortality_bloc.dart';
 import 'package:ep_cf_operation/util/node_util.dart';
@@ -42,6 +41,7 @@ class _MortalityEntryState extends State<MortalityEntry> {
   final houseTec = TextEditingController();
   final mortalityTec = TextEditingController();
   final rejectTec = TextEditingController();
+  final remarkTec = TextEditingController();
 
   var recordDate = DateTime.now();
 
@@ -49,12 +49,6 @@ class _MortalityEntryState extends State<MortalityEntry> {
   void initState() {
     super.initState();
     dateTec.text = dateFormat.format(recordDate);
-    _loadNewHouseNo();
-  }
-
-  _loadNewHouseNo() async {
-    var newHouseNo = await MortalityRepository().getNewHouseNo(dateTec.text);
-    houseTec.text = newHouseNo.toString();
   }
 
   @override
@@ -63,6 +57,7 @@ class _MortalityEntryState extends State<MortalityEntry> {
     houseTec.dispose();
     mortalityTec.dispose();
     rejectTec.dispose();
+    remarkTec.dispose();
     super.dispose();
   }
 
@@ -108,14 +103,13 @@ class _MortalityEntryState extends State<MortalityEntry> {
                       final selectedDate = await showDatePicker(
                         context: context,
                         initialDate: recordDate,
-                        firstDate: DateTime.now().add(Duration(days: -7)),
+                        firstDate: DateTime.now().add(Duration(days: -2)),
                         lastDate: DateTime.now(),
                       );
 
                       if (selectedDate != null) {
                         recordDate = selectedDate;
                         dateTec.text = dateFormat.format(selectedDate);
-                        _loadNewHouseNo();
                       }
                     },
                     decoration: InputDecoration(
@@ -132,6 +126,7 @@ class _MortalityEntryState extends State<MortalityEntry> {
                 Expanded(
                   child: TextFormField(
                     controller: houseTec,
+                    autofocus: true,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -146,6 +141,7 @@ class _MortalityEntryState extends State<MortalityEntry> {
                       if (int.tryParse(value) == null) {
                         return Strings.msgNumberOnly;
                       }
+                      return null;
                     },
                   ),
                 ),
@@ -159,12 +155,11 @@ class _MortalityEntryState extends State<MortalityEntry> {
                   Expanded(
                     child: TextFormField(
                       controller: mortalityTec,
-                      autofocus: true,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: Strings.dead,
-                        prefixIcon: Icon(FontAwesomeIcons.skullCrossbones),
+                        prefixIcon: Icon(Icons.clear),
                         contentPadding: EdgeInsets.all(16),
                       ),
                       validator: (value) {
@@ -174,6 +169,7 @@ class _MortalityEntryState extends State<MortalityEntry> {
                         if (int.tryParse(value) == null) {
                           return Strings.msgNumberOnly;
                         }
+                        return null;
                       },
                     ),
                   ),
@@ -197,10 +193,25 @@ class _MortalityEntryState extends State<MortalityEntry> {
                         if (int.tryParse(value) == null) {
                           return Strings.msgNumberOnly;
                         }
+                        return null;
                       },
                     ),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: TextFormField(
+                controller: remarkTec,
+                keyboardType: TextInputType.text,
+                maxLength: 100,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: Strings.remark,
+                  prefixIcon: Icon(FontAwesomeIcons.listUl),
+                  contentPadding: EdgeInsets.all(16),
+                ),
               ),
             ),
             Padding(
@@ -215,6 +226,7 @@ class _MortalityEntryState extends State<MortalityEntry> {
                           houseNo: int.tryParse(houseTec.text),
                           mQty: int.tryParse(mortalityTec.text),
                           rQty: int.tryParse(rejectTec.text),
+                          remark: remarkTec.text,
                         )) {
                           Navigator.pop(context);
                         }

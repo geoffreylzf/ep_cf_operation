@@ -40,6 +40,8 @@ class Db {
         await db.execute(DbSql.createTempCfFeedInDetailTable);
         await db.execute(DbSql.createCfFeedInTable);
         await db.execute(DbSql.createCfFeedInDetailTable);
+
+        await db.execute(DbSql.createWeighingScheduleTable);
       },
     );
   }

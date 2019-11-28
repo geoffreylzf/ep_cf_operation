@@ -12,8 +12,10 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="ep_cf_operation"
-        android:icon="@mipmap/ic_launcher">
+        android:label="EP CF Operation"
+        android:allowBackup="false"
+        android:icon="@drawable/ep_cf_operation_icon"
+        android:roundIcon="@drawable/ep_cf_operation_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

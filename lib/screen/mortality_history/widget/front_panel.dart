@@ -2,6 +2,7 @@ import 'package:ep_cf_operation/model/table/cf_mortality.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/mortality_history/mortality_history_bloc.dart';
 import 'package:ep_cf_operation/util/date_time_util.dart';
+import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -142,62 +143,75 @@ ${Strings.reject} : ${cfMortality.rQty}
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
             color: DateTimeUtil().getWeekColor(cfMortality.recordDate),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    RichText(
+            child: InkWell(
+              onTap: () {
+                final remark = cfMortality.remark ?? "No remark";
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SimpleAlertDialog(
+                        title: Strings.remark,
+                        message: remark,
+                      );
+                    });
+              },
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(
+                          style: DefaultTextStyle.of(context).style,
+                          children: [
+                            TextSpan(text: "House ", style: TextStyle(fontSize: 10)),
+                            TextSpan(
+                                text: "#${cfMortality.houseNo.toString()}",
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+                            child: Icon(Icons.date_range, size: 12),
+                          ),
+                          Text(DateTimeUtil().getDisplayDate(cfMortality.recordDate),
+                              style: TextStyle(fontSize: 9)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: RichText(
+                      textAlign: TextAlign.end,
                       text: TextSpan(
                         style: DefaultTextStyle.of(context).style,
                         children: [
-                          TextSpan(text: "House ", style: TextStyle(fontSize: 10)),
                           TextSpan(
-                              text: "#${cfMortality.houseNo.toString()}",
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                              text: cfMortality.mQty.toString(),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          TextSpan(text: " Dead  ", style: TextStyle(fontSize: 10)),
+                          TextSpan(
+                              text: cfMortality.rQty.toString(),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          TextSpan(text: " Reject ", style: TextStyle(fontSize: 10)),
                         ],
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(right: 4.0),
-                          child: Icon(Icons.date_range, size: 12),
-                        ),
-                        Text(DateTimeUtil().getDisplayDate(cfMortality.recordDate),
-                            style: TextStyle(fontSize: 9)),
-                      ],
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: RichText(
-                    textAlign: TextAlign.end,
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
-                      children: [
-                        TextSpan(
-                            text: cfMortality.mQty.toString(),
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        TextSpan(text: " Dead  ", style: TextStyle(fontSize: 10)),
-                        TextSpan(
-                            text: cfMortality.rQty.toString(),
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        TextSpan(text: " Reject ", style: TextStyle(fontSize: 10)),
-                      ],
-                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: cfMortality.isUploaded()
-                      ? Icon(
-                          Icons.cloud_upload,
-                          size: 12,
-                        )
-                      : Container(width: 12),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: cfMortality.isUploaded()
+                        ? Icon(
+                            Icons.cloud_upload,
+                            size: 12,
+                          )
+                        : Container(width: 12),
+                  ),
+                ],
+              ),
             ),
           ),
         );

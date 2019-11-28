@@ -1,4 +1,5 @@
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
+import 'package:ep_cf_operation/model/table/weighing_schedule.dart';
 import 'package:ep_cf_operation/module/shares_preferences_module.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_weight_bloc.dart';
@@ -20,7 +21,7 @@ class _WeightDashboardState extends State<WeightDashboard> {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<HomeWeightBloc>(context);
-    bloc.loadCurrentMortalityList();
+    bloc.init();
     return Stack(
       children: [
         Center(
@@ -42,6 +43,7 @@ class _WeightDashboardState extends State<WeightDashboard> {
                 },
               ),
             ),
+            Schedule(),
           ],
         ),
       ],
@@ -203,5 +205,116 @@ class _CurrentWeightListState extends State<CurrentWeightList> {
             );
           }
         });
+  }
+}
+
+class Schedule extends StatefulWidget {
+  @override
+  _ScheduleState createState() => _ScheduleState();
+}
+
+class _ScheduleState extends State<Schedule> {
+  @override
+  Widget build(BuildContext context) {
+    final bloc = Provider.of<HomeWeightBloc>(context);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 0,
+        color: Colors.white70,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12.0, top: 12, right: 12, bottom: 4),
+          child: Column(
+            children: <Widget>[
+              CardLabelSmall("Weighing Schedule"),
+              StreamBuilder<List<WeighingSchedule>>(
+                stream: bloc.weighingScheduleStream,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  final list = snapshot.data;
+
+                  return ListView.builder(
+                    itemCount: list.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (ctx, index) {
+                      var rowColor = Theme.of(context).highlightColor;
+                      if (index % 2 == 0) {
+                        rowColor = Theme.of(context).primaryColorLight;
+                      }
+                      final row = list[index];
+                      return Container(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: [
+                                    TextSpan(text: "Date ", style: TextStyle(fontSize: 10)),
+                                    TextSpan(
+                                        text: "${row.weighingDate}",
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: [
+                                    TextSpan(
+                                        text: row.houseNo.toString(),
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                    TextSpan(text: " House ", style: TextStyle(fontSize: 10)),
+                                    TextSpan(
+                                        text: row.day.toString(),
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                    TextSpan(text: " Age (Day) ", style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  StreamBuilder<String>(
+                      stream: bloc.scheduleMsgStream,
+                      builder: (context, snapshot) {
+                        var msg = "";
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          msg = "Loading...";
+                        }else{
+                          msg = snapshot.data;
+                        }
+                        return Text(msg, style: TextStyle(fontSize: 10),);
+                      }),
+                  FlatButton.icon(
+                    icon: Icon(Icons.refresh),
+                    label: const Text('Refresh'),
+                    onPressed: () {
+                      bloc.retrieveWeighingSchedule();
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

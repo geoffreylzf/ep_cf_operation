@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen>
             bottom: TabBar(
               controller: _tabController,
               tabs: [
-                Container(height: 28, child: Tab(icon: Icon(Icons.clear, size: 16))),
+                Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.dizzy, size: 16))),
                 Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.weight, size: 16))),
                 Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.seedling, size: 16))),
               ],

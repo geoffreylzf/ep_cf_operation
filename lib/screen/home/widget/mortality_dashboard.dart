@@ -7,6 +7,7 @@ import 'package:ep_cf_operation/screen/mortality_history/mortality_history_scree
 import 'package:ep_cf_operation/widget/card_label_small.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class MortalityDashboard extends StatefulWidget {
@@ -24,7 +25,7 @@ class _MortalityDashboardState extends State<MortalityDashboard> {
         Center(
           child: Opacity(
             opacity: 0.1,
-            child: Icon(Icons.clear, size: 250),
+            child: Icon(FontAwesomeIcons.dizzy, size: 250),
           ),
         ),
         ListView(

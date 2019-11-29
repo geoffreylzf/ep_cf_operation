@@ -1,8 +1,9 @@
 name: ep_cf_operation
 description: A new Flutter application.
 
-version: 1.1.0+5
+version: 1.1.1+6
 
+#1.1.1+6 Change mortality icon
 #1.1.0+5 Add weighing schedule
 #1.0.3+4 Change date entry allow 2 days only (today, yesterday), add mortality remark
 #1.0.1+2 Change mortality icon and remove google sign in

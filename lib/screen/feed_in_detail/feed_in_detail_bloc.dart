@@ -11,7 +11,7 @@ import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/feed_in_detail/feed_in_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:vibrate/vibrate.dart';
+import 'package:vibration/vibration.dart';
 
 class FeedInDetailBloc extends BlocBase {
   //For detail entry
@@ -178,7 +178,9 @@ class FeedInDetailBloc extends BlocBase {
     await TempCfFeedInDetailDao().insert(temp);
     await _loadTempList();
 
-    Vibrate.vibrate();
+    if (Vibration.hasVibrator() != null) {
+      Vibration.vibrate();
+    }
     _delegate.switchTab(1); //switch the tab to summary
     await clearSelected();
     return true;

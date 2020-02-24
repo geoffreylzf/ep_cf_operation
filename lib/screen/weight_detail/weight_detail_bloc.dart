@@ -9,8 +9,8 @@ import 'package:ep_cf_operation/model/table/cf_weight_detail.dart';
 import 'package:ep_cf_operation/model/table/temp_cf_weight_detail.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:flutter/material.dart';
-import 'package:vibrate/vibrate.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:vibration/vibration.dart';
 
 class WeightDetailBloc extends BlocBase {
   final _cfWeightSubject = BehaviorSubject<CfWeight>();
@@ -81,7 +81,9 @@ class WeightDetailBloc extends BlocBase {
     await TempCfWeightDetailDao().insert(temp);
     await _loadTempList();
 
-    Vibrate.vibrate();
+    if (Vibration.hasVibrator() != null) {
+      Vibration.vibrate();
+    }
     return true;
   }
 

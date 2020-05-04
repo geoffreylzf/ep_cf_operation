@@ -36,6 +36,7 @@ class MortalityEntry extends StatefulWidget {
 
 class _MortalityEntryState extends State<MortalityEntry> {
   final _formKey = GlobalKey<FormState>();
+
   final dateFormat = DateFormat('yyyy-MM-dd');
   final dateTec = TextEditingController();
   final houseTec = TextEditingController();

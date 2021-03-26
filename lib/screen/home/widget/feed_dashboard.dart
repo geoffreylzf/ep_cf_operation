@@ -1,6 +1,7 @@
 import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
 import 'package:ep_cf_operation/module/shares_preferences_module.dart';
 import 'package:ep_cf_operation/res/string.dart';
+import 'package:ep_cf_operation/screen/feed_discharge/feed_discharge_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in/feed_in_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in_history/feed_in_history_screen.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
@@ -31,16 +32,30 @@ class _FeedDashboardState extends State<FeedDashboard> {
         ListView(
           children: [
             FeedInCard(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: RaisedButton.icon(
-                icon: Icon(Icons.history),
-                label: Text(Strings.history),
-                onPressed: () {
-                  Navigator.pushNamed(context, FeedInHistoryScreen.route);
-                },
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //   child: Row(
+            //     children: [
+            //       Expanded(
+            //         child: RaisedButton.icon(
+            //           icon: Icon(FontAwesomeIcons.signOutAlt, size: 16),
+            //           label: Text(Strings.feedDischarge),
+            //           onPressed: () {
+            //             Navigator.pushNamed(context, FeedDischargeScreen.route);
+            //           },
+            //         ),
+            //       ),
+            //       Container(width: 8),
+            //       Expanded(
+            //         child: RaisedButton.icon(
+            //           icon: Icon(FontAwesomeIcons.signInAlt, size: 16),
+            //           label: Text(Strings.feedReceive),
+            //           onPressed: () {},
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ],

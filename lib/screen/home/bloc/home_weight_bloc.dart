@@ -6,7 +6,6 @@ import 'package:ep_cf_operation/model/table/weighing_schedule.dart';
 import 'package:ep_cf_operation/module/api_module.dart';
 import 'package:ep_cf_operation/module/shares_preferences_module.dart';
 import 'package:ep_cf_operation/repository/weight_repository.dart';
-import 'package:ep_cf_operation/res/string.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 

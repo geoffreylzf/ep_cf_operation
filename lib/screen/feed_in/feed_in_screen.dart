@@ -4,6 +4,7 @@ import 'package:ep_cf_operation/model/table/branch.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/feed_in/feed_in_bloc.dart';
 import 'package:ep_cf_operation/screen/feed_in_detail/feed_in_detail_screen.dart';
+import 'package:ep_cf_operation/screen/feed_in_history/feed_in_history_screen.dart';
 import 'package:ep_cf_operation/util/node_util.dart';
 import 'package:ep_cf_operation/widget/display_field.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,15 @@ class _FeedInScreenState extends State<FeedInScreen> with SimpleAlertDialogMixin
       builder: (_) => FeedInBloc(mixin: this),
       dispose: (_, value) => value.dispose(),
       child: Scaffold(
-        appBar: AppBar(title: Text(Strings.newFeedIn)),
+        appBar: AppBar(
+          title: Text(Strings.newFeedIn),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.history),
+              onPressed: () => Navigator.pushNamed(context, FeedInHistoryScreen.route),
+            ),
+          ],
+        ),
         body: FeedInEntry(),
       ),
     );

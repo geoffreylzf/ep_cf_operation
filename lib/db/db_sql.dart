@@ -1,4 +1,4 @@
-class DbSql {
+ class DbSql {
   static final createBranchTable = """
       CREATE TABLE `branch` (
       `id` INTEGER PRIMARY KEY, 
@@ -114,4 +114,70 @@ class DbSql {
       `day` INTEGER,
       `weighing_date` TEXT);
   """;
+
+  static final createCfFeedDischargeTable = """
+      CREATE TABLE `cf_feed_discharge` (
+      `id` INTEGER PRIMARY KEY, 
+      `sid` INTEGER,
+      `company_id` INTEGER,
+      `location_id` INTEGER,
+      `record_date` TEXT, 
+      `discharge_code` TEXT,
+      `truck_no` TEXT,
+      `uuid` TEXT,
+      `is_delete` INTEGER DEFAULT 0,
+      `is_upload` INTEGER DEFAULT 0,
+      `timestamp` TIMESTAMP);
+  """;
+
+  static final createCfFeedDischargeDetailTable = """
+      CREATE TABLE `cf_feed_discharge_detail` (
+      `id` INTEGER PRIMARY KEY,
+      `cf_feed_discharge_id` INTEGER,
+      `house_no` INTEGER,
+      `item_packing_id` INTEGER,
+      `weight` REAL);
+  """;
+
+  static final createTempCfFeedDischargeDetailTable = """
+      CREATE TABLE `temp_cf_feed_discharge_detail` (
+      `id` INTEGER PRIMARY KEY,
+      `house_no` INTEGER,
+      `item_packing_id` INTEGER,
+      `weight` REAL);
+  """;
+
+  static final createCfFeedReceiveTable = """
+      CREATE TABLE `cf_feed_receive` (
+      `id` INTEGER PRIMARY KEY, 
+      `sid` INTEGER,
+      `company_id` INTEGER,
+      `location_id` INTEGER,
+      `record_date` TEXT, 
+      `discharge_code` TEXT,
+      `truck_no` TEXT,
+      `variance` REAL,
+      `uuid` TEXT,
+      `is_delete` INTEGER DEFAULT 0,
+      `is_upload` INTEGER DEFAULT 0,
+      `timestamp` TIMESTAMP);
+  """;
+
+  static final createCfFeedReceiveDetailTable = """
+      CREATE TABLE `cf_feed_receive_detail` (
+      `id` INTEGER PRIMARY KEY,
+      `cf_feed_receive_id` INTEGER,
+      `house_no` INTEGER,
+      `item_packing_id` INTEGER,
+      `weight` REAL);
+  """;
+
+  static final createTempCfFeedReceiveDetailTable = """
+      CREATE TABLE `temp_cf_feed_receive_detail` (
+      `id` INTEGER PRIMARY KEY,
+      `house_no` INTEGER,
+      `item_packing_id` INTEGER,
+      `weight` REAL);
+  """;
+
 }

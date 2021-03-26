@@ -35,6 +35,12 @@ class _WeightDetailScreenState extends State<WeightDetailScreen>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [

@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 
 import 'db_sql.dart';
 
-const _version = 1;
+const _version = 2;
 const _dbName = "ep_cf_operation.db";
 
 class Db {
@@ -42,6 +42,23 @@ class Db {
         await db.execute(DbSql.createCfFeedInDetailTable);
 
         await db.execute(DbSql.createWeighingScheduleTable);
+
+        await db.execute(DbSql.createCfFeedDischargeTable);
+        await db.execute(DbSql.createCfFeedDischargeDetailTable);
+        await db.execute(DbSql.createTempCfFeedDischargeDetailTable);
+        await db.execute(DbSql.createCfFeedReceiveTable);
+        await db.execute(DbSql.createCfFeedReceiveDetailTable);
+        await db.execute(DbSql.createTempCfFeedReceiveDetailTable);
+      },
+      onUpgrade: (Database db, int oldVer, int newVer) async {
+        if (oldVer <= 1) {
+          await db.execute(DbSql.createCfFeedDischargeTable);
+          await db.execute(DbSql.createCfFeedDischargeDetailTable);
+          await db.execute(DbSql.createTempCfFeedDischargeDetailTable);
+          await db.execute(DbSql.createCfFeedReceiveTable);
+          await db.execute(DbSql.createCfFeedReceiveDetailTable);
+          await db.execute(DbSql.createTempCfFeedReceiveDetailTable);
+        }
       },
     );
   }

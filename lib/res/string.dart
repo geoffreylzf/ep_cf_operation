@@ -4,6 +4,7 @@ class Strings {
   static const mortalityHistory = "Mortality History";
   static const bodyWeightHistory = "Body Weight History";
   static const newBodyWeight = "New Body Weight";
+  static const newFeedDischarge = "New Feed Discharge";
   static const newBodyWeightDetail = "New Body Weight Detail";
   static const bodyWeight = "Body Weight";
   static const bodyWeightView = "Body Weight View";
@@ -27,6 +28,8 @@ class Strings {
   static const weightKg = "Weight (Kg)";
   static const weightGram = "Weight (Gram)";
   static const history = "History";
+  static const feedDischarge = "Feed Discharge";
+  static const feedReceive = "Feed Receive";
   static const refresh = "Refresh";
   static const branch = "Branch";
   static const feed = "Feed";

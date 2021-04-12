@@ -13,6 +13,7 @@ import 'package:ep_cf_operation/screen/mortality/mortality_screen.dart';
 import 'package:ep_cf_operation/screen/mortality_history/mortality_history_screen.dart';
 import 'package:ep_cf_operation/screen/settings/settings_screen.dart';
 import 'package:ep_cf_operation/screen/splash/splash_screen.dart';
+import 'package:ep_cf_operation/screen/update_app_ver/update_app_ver_screen.dart';
 import 'package:ep_cf_operation/screen/upload/upload_screen.dart';
 import 'package:ep_cf_operation/screen/weight/weight_screen.dart';
 import 'package:ep_cf_operation/screen/weight_detail/weight_detail_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.route: (ctx) => HomeScreen(),
         HousekeepingScreen.route: (ctx) => HousekeepingScreen(),
         UploadScreen.route: (ctx) => UploadScreen(),
+        UpdateAppVerScreen.route: (ctx) => UpdateAppVerScreen(),
         SettingsScreen.route: (ctx) => SettingsScreen(),
         CompanyScreen.route: (ctx) => CompanyScreen(),
         LocationScreen.route: (ctx) {

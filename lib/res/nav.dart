@@ -5,6 +5,7 @@ import 'package:ep_cf_operation/screen/company/company_screen.dart';
 import 'package:ep_cf_operation/screen/housekeeping/housekeeping_screen.dart';
 import 'package:ep_cf_operation/screen/login/login_screen.dart';
 import 'package:ep_cf_operation/screen/settings/settings_screen.dart';
+import 'package:ep_cf_operation/screen/update_app_ver/update_app_ver_screen.dart';
 import 'package:ep_cf_operation/widget/simple_confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -77,6 +78,15 @@ class NavDrawerStart extends StatelessWidget {
             onTap: () {
               Navigator.pop(mainContext);
               Navigator.pushNamed(mainContext, SettingsScreen.route);
+            },
+          ),
+          Divider(height: 0),
+          ListTile(
+            leading: Icon(Icons.update),
+            title: Text("Update App Version"),
+            onTap: () {
+              Navigator.pop(mainContext);
+              Navigator.pushNamed(mainContext, UpdateAppVerScreen.route);
             },
           ),
           Divider(height: 0),

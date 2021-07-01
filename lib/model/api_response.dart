@@ -1,5 +1,6 @@
 import 'package:ep_cf_operation/model/auth.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
+import 'package:ep_cf_operation/model/table/cf_feed_consumption.dart';
 import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
 import 'package:ep_cf_operation/model/table/cf_mortality.dart';
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
@@ -30,6 +31,9 @@ class ApiResponse<T> {
       result = List<CfWeight>.from(json["result"].map((x) => CfWeight.fromJson(x)));
     } else if (T.toString() == "List<CfFeedIn>") {
       result = List<CfFeedIn>.from(json["result"].map((x) => CfFeedIn.fromJson(x)));
+    } else if (T.toString() == "List<CfFeedConsumption>") {
+      result =
+          List<CfFeedConsumption>.from(json["result"].map((x) => CfFeedConsumption.fromJson(x)));
     } else if (T.toString() == "List<WeighingSchedule>") {
       result = List<WeighingSchedule>.from(json["result"].map((x) => WeighingSchedule.fromJson(x)));
     }

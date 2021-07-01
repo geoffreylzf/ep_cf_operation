@@ -1,7 +1,9 @@
 class Strings {
   static const contractFarmerOperation = "Contract Farmer Operation";
   static const mortality = "Mortality";
+  static const feedConsumption = "Feed Consumption";
   static const mortalityHistory = "Mortality History";
+  static const feedConsumptionHistory = "Feed Consumption History";
   static const bodyWeightHistory = "Body Weight History";
   static const newBodyWeight = "New Body Weight";
   static const newFeedDischarge = "New Feed Discharge";
@@ -10,6 +12,7 @@ class Strings {
   static const bodyWeightView = "Body Weight View";
   static const feedInHistory = "Feed In History";
   static const newFeedIn = "New Feed In";
+  static const newFeedConsumption = "New Feed Consumption";
   static const newFeedInDetail = "New Feed In Detail";
   static const docNo = "Doc No";
   static const feedItem = "Feed Item";
@@ -25,6 +28,8 @@ class Strings {
   static const quantity = "Quantity";
   static const qty = "Qty";
   static const weight = "Weight";
+  static const bag = "Bag";
+  static const feedType = "Feed Type";
   static const weightKg = "Weight (Kg)";
   static const weightGram = "Weight (Gram)";
   static const history = "History";

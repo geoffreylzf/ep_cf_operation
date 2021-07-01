@@ -1,4 +1,4 @@
- class DbSql {
+class DbSql {
   static final createBranchTable = """
       CREATE TABLE `branch` (
       `id` INTEGER PRIMARY KEY, 
@@ -180,4 +180,19 @@
       `weight` REAL);
   """;
 
+  static final createCfFeedConsumptionTable = """
+      CREATE TABLE `cf_feed_consumption` (
+      `id` INTEGER PRIMARY KEY, 
+      `sid` INTEGER,
+      `company_id` INTEGER,
+      `location_id` INTEGER,
+      `house_no` INTEGER,
+      `record_date` TEXT,
+      `item_type_code` TEXT,
+      `weight` REAL,
+      `uuid` TEXT,
+      `is_delete` INTEGER DEFAULT 0,
+      `is_upload` INTEGER DEFAULT 0,
+      `timestamp` TIMESTAMP);
+  """;
 }

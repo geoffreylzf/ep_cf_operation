@@ -1,6 +1,6 @@
 import 'package:ep_cf_operation/db/db.dart';
 
-class UtilDao{
+class UtilDao {
   static final _instance = UtilDao._internal();
 
   UtilDao._internal();
@@ -17,6 +17,8 @@ class UtilDao{
     SELECT COUNT(*) as count FROM cf_weight WHERE is_upload = 0
     UNION
     SELECT COUNT(*) as count FROM cf_feed_in WHERE is_upload = 0
+    UNION
+    SELECT COUNT(*) as count FROM cf_feed_consumption WHERE is_upload = 0
     ) A
     """);
 

@@ -1,5 +1,7 @@
 import 'package:ep_cf_operation/model/table/cf_weight.dart';
 import 'package:ep_cf_operation/screen/company/company_screen.dart';
+import 'package:ep_cf_operation/screen/feed_consumption/feed_consumption_screen.dart';
+import 'package:ep_cf_operation/screen/feed_consumption_history/feed_consumption_history_screen.dart';
 import 'package:ep_cf_operation/screen/feed_discharge/feed_discharge_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in/feed_in_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in_detail/feed_in_detail_screen.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
           return WeightViewScreen(cfWeightId);
         },
         FeedInScreen.route: (ctx) => FeedInScreen(),
+        FeedConsumptionScreen.route: (ctx) => FeedConsumptionScreen(),
+        FeedConsumptionHistoryScreen.route: (ctx) => FeedConsumptionHistoryScreen(),
         FeedInDetailScreen.route: (ctx) {
           final arguments = ModalRoute.of(ctx).settings.arguments as FeedInDetailScreenArguments;
           return FeedInDetailScreen(arguments);

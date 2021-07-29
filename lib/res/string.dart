@@ -29,6 +29,7 @@ class Strings {
   static const qty = "Qty";
   static const weight = "Weight";
   static const bag = "Bag";
+  static const age = "Age";
   static const feedType = "Feed Type";
   static const weightKg = "Weight (Kg)";
   static const weightGram = "Weight (Gram)";

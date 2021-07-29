@@ -102,7 +102,7 @@ class _FeedInEntryState extends State<FeedInEntry> {
               final selectedDate = await showDatePicker(
                 context: context,
                 initialDate: recordDate,
-                firstDate: DateTime.now().add(Duration(days: -2)),
+                firstDate: DateTime.now().add(Duration(days: -1)),
                 lastDate: DateTime.now(),
               );
 

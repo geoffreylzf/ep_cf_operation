@@ -96,7 +96,7 @@ class _WeightEntryState extends State<WeightEntry> {
                 final selectedDate = await showDatePicker(
                   context: context,
                   initialDate: recordDate,
-                  firstDate: DateTime.now().add(Duration(days: -2)),
+                  firstDate: DateTime.now().add(Duration(days: -1)),
                   lastDate: DateTime.now(),
                 );
 
@@ -148,7 +148,7 @@ class _WeightEntryState extends State<WeightEntry> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: Strings.day,
+                        labelText: Strings.age,
                         prefixIcon: Icon(FontAwesomeIcons.calendarDay),
                         contentPadding: EdgeInsets.all(16),
                       ),

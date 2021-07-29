@@ -1,35 +1,36 @@
-import 'package:ep_cf_operation/model/table/cf_feed_in.dart';
+import 'package:ep_cf_operation/model/table/cf_feed_consumption.dart';
 import 'package:ep_cf_operation/module/shares_preferences_module.dart';
 import 'package:ep_cf_operation/res/string.dart';
-import 'package:ep_cf_operation/screen/feed_in/feed_in_screen.dart';
-import 'package:ep_cf_operation/screen/feed_in_history/feed_in_history_screen.dart';
+import 'package:ep_cf_operation/screen/feed_consumption/feed_consumption_screen.dart';
+import 'package:ep_cf_operation/screen/feed_consumption_history/feed_consumption_history_screen.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
+import 'package:ep_cf_operation/screen/home/bloc/home_feed_consumption_bloc.dart';
 import 'package:ep_cf_operation/widget/card_label_small.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FeedDashboard extends StatefulWidget {
+class FeedConsumptionDashboard extends StatefulWidget {
   @override
-  _FeedDashboardState createState() => _FeedDashboardState();
+  _FeedConsumptionDashboardState createState() => _FeedConsumptionDashboardState();
 }
 
-class _FeedDashboardState extends State<FeedDashboard> {
+class _FeedConsumptionDashboardState extends State<FeedConsumptionDashboard> {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomeFeedBloc>(context);
+    final bloc = Provider.of<HomeFeedConsumptionBloc>(context);
     bloc.loadCurrentFeedInList();
     return Stack(
       children: [
         Center(
           child: Opacity(
             opacity: 0.1,
-            child: Icon(Icons.local_shipping_outlined, size: 250),
+            child: Icon(Icons.grain, size: 250),
           ),
         ),
         ListView(
           children: [
-            FeedInCard(),
+            FeedConsumptionCard(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: RaisedButton.icon(
@@ -38,35 +39,11 @@ class _FeedDashboardState extends State<FeedDashboard> {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    FeedInHistoryScreen.route,
+                    FeedConsumptionHistoryScreen.route,
                   );
                 },
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: RaisedButton.icon(
-            //           icon: Icon(FontAwesomeIcons.signOutAlt, size: 16),
-            //           label: Text(Strings.feedDischarge),
-            //           onPressed: () {
-            //             Navigator.pushNamed(context, FeedDischargeScreen.route);
-            //           },
-            //         ),
-            //       ),
-            //       Container(width: 8),
-            //       Expanded(
-            //         child: RaisedButton.icon(
-            //           icon: Icon(FontAwesomeIcons.signInAlt, size: 16),
-            //           label: Text(Strings.feedReceive),
-            //           onPressed: () {},
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ],
@@ -74,12 +51,12 @@ class _FeedDashboardState extends State<FeedDashboard> {
   }
 }
 
-class FeedInCard extends StatefulWidget {
+class FeedConsumptionCard extends StatefulWidget {
   @override
-  _FeedInCardState createState() => _FeedInCardState();
+  _FeedConsumptionCardState createState() => _FeedConsumptionCardState();
 }
 
-class _FeedInCardState extends State<FeedInCard> {
+class _FeedConsumptionCardState extends State<FeedConsumptionCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -104,7 +81,7 @@ class _FeedInCardState extends State<FeedInCard> {
               await new Future.delayed(const Duration(milliseconds: 300));
               Navigator.pushNamed(
                 context,
-                FeedInScreen.route,
+                FeedConsumptionScreen.route,
               );
             }
           },
@@ -113,15 +90,15 @@ class _FeedInCardState extends State<FeedInCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CardLabelSmall("Feed In Today"),
-                CurrentFeedInList(),
+                CardLabelSmall("Feed Consumption Today"),
+                CurrentFeedConsumptionList(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        "Tap to enter new feed in",
+                        "Tap to enter new feed consumption",
                         style: TextStyle(color: Colors.grey, fontSize: 10),
                       ),
                     ),
@@ -136,17 +113,18 @@ class _FeedInCardState extends State<FeedInCard> {
   }
 }
 
-class CurrentFeedInList extends StatefulWidget {
+
+class CurrentFeedConsumptionList extends StatefulWidget {
   @override
-  _CurrentFeedInListState createState() => _CurrentFeedInListState();
+  _CurrentFeedConsumptionListState createState() => _CurrentFeedConsumptionListState();
 }
 
-class _CurrentFeedInListState extends State<CurrentFeedInList> {
+class _CurrentFeedConsumptionListState extends State<CurrentFeedConsumptionList> {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<HomeFeedBloc>(context);
-    return StreamBuilder<List<CfFeedIn>>(
-      stream: bloc.curFeedInListStream,
+    return StreamBuilder<List<CfFeedConsumption>>(
+      stream: bloc.curFeedConsumptionListStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
@@ -173,9 +151,9 @@ class _CurrentFeedInListState extends State<CurrentFeedInList> {
                         text: TextSpan(
                           style: DefaultTextStyle.of(context).style,
                           children: [
-                            TextSpan(text: "Doc No ", style: TextStyle(fontSize: 10)),
+                            TextSpan(text: "House ", style: TextStyle(fontSize: 10)),
                             TextSpan(
-                                text: "${list[index].docNo.toString()}",
+                                text: "#${list[index].houseNo.toString()}",
                                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                           ],
                         ),
@@ -184,10 +162,18 @@ class _CurrentFeedInListState extends State<CurrentFeedInList> {
                         text: TextSpan(
                           style: DefaultTextStyle.of(context).style,
                           children: [
-                            TextSpan(text: " Truck No ", style: TextStyle(fontSize: 10)),
                             TextSpan(
-                                text: list[index].truckNo.toString(),
+                              text: list[index].getItemTypeCodeName() + " ",
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                                text: list[index].getBag().toStringAsFixed(3),
                                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            TextSpan(text: " Bag ", style: TextStyle(fontSize: 10)),
+                            TextSpan(
+                                text: list[index].weight.toStringAsFixed(3),
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            TextSpan(text: " Kg ", style: TextStyle(fontSize: 10)),
                           ],
                         ),
                       ),
@@ -215,7 +201,7 @@ class _CurrentFeedInListState extends State<CurrentFeedInList> {
                     ),
                     Container(width: 4),
                     Text(
-                      "No feed in record today.",
+                      "No feed consumption record today.",
                       style: TextStyle(color: Colors.white),
                     ),
                   ],

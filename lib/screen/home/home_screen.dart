@@ -1,11 +1,14 @@
 import 'package:ep_cf_operation/mixin/simple_alert_dialog_mixin.dart';
 import 'package:ep_cf_operation/model/table/branch.dart';
+import 'package:ep_cf_operation/presentation/custom_icon_icons.dart';
 import 'package:ep_cf_operation/res/nav.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
+import 'package:ep_cf_operation/screen/home/bloc/home_feed_consumption_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_mortality_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_weight_bloc.dart';
+import 'package:ep_cf_operation/screen/home/widget/feed_consumption_dashboard.dart';
 import 'package:ep_cf_operation/screen/home/widget/feed_dashboard.dart';
 import 'package:ep_cf_operation/screen/home/widget/mortality_dashboard.dart';
 import 'package:ep_cf_operation/screen/home/widget/weight_dashboard.dart';
@@ -28,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 3);
+    _tabController = TabController(vsync: this, length: 4);
   }
 
   @override
@@ -51,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen>
           builder: (_) => HomeFeedBloc(),
           dispose: (_, value) => value.dispose(),
         ),
+        Provider<HomeFeedConsumptionBloc>(
+          builder: (_) => HomeFeedConsumptionBloc(),
+          dispose: (_, value) => value.dispose(),
+        ),
       ],
       child: Scaffold(
         appBar: PreferredSize(
@@ -64,9 +71,10 @@ class _HomeScreenState extends State<HomeScreen>
             bottom: TabBar(
               controller: _tabController,
               tabs: [
-                Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.dizzy, size: 16))),
+                Container(height: 28, child: Tab(icon: Icon(CustomIcon.roast_chicken, size: 16))),
                 Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.weight, size: 16))),
-                Container(height: 28, child: Tab(icon: Icon(FontAwesomeIcons.seedling, size: 16))),
+                Container(height: 28, child: Tab(icon: Icon(Icons.local_shipping_outlined, size: 16))),
+                Container(height: 28, child: Tab(icon: Icon(Icons.grain, size: 16))),
               ],
             ),
           ),
@@ -77,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
             MortalityDashboard(),
             WeightDashboard(),
             FeedDashboard(),
+            FeedConsumptionDashboard(),
           ],
         ),
         bottomNavigationBar: BottomBar(),

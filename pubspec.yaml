@@ -1,8 +1,9 @@
 name: ep_cf_operation
 description: A new Flutter application.
 
-version: 2.1.0+10
+version: 2.1.1+11
 
+#2.1.1+11 Modify home layout and allow backdate only 1 day
 #2.1.0+10 Add Feed Consumption
 #2.0.0+9 Remove google play
 #1.1.3+8 Change global url
@@ -24,7 +25,7 @@ dependencies:
   rxdart: ^0.22.0
   provider: ^2.0.1
   intl: ^0.15.8
-  font_awesome_flutter: ^8.4.0
+  font_awesome_flutter: ^8.12.0
   package_info: ^0.4.0+13
   uuid: ^2.0.1
   toast: ^0.1.3
@@ -40,3 +41,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: CustomIcon
+      fonts:
+       - asset: fonts/CustomIcon.ttf

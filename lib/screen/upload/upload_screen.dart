@@ -1,4 +1,5 @@
 import 'package:ep_cf_operation/mixin/simple_alert_dialog_mixin.dart';
+import 'package:ep_cf_operation/presentation/custom_icon_icons.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/upload/upload_bloc.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
@@ -81,10 +82,10 @@ class _UploadListState extends State<UploadList> {
 
     return ListView(
       children: [
-        UploadCountRow(FontAwesomeIcons.dizzy, Strings.mortality, bloc.mortalityCountStream),
+        UploadCountRow(CustomIcon.roast_chicken, Strings.mortality, bloc.mortalityCountStream),
         UploadCountRow(FontAwesomeIcons.weight, Strings.bodyWeight, bloc.weightCountStream),
-        UploadCountRow(FontAwesomeIcons.seedling, Strings.feed, bloc.feedInCountStream),
-        UploadCountRow(FontAwesomeIcons.seedling, Strings.feedConsumption, bloc.feedConsumptionCountStream),
+        UploadCountRow(Icons.local_shipping_outlined, Strings.feed, bloc.feedInCountStream),
+        UploadCountRow(Icons.grain, Strings.feedConsumption, bloc.feedConsumptionCountStream),
       ],
     );
   }

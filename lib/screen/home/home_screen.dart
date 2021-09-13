@@ -4,7 +4,7 @@ import 'package:ep_cf_operation/presentation/custom_icon_icons.dart';
 import 'package:ep_cf_operation/res/nav.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_bloc.dart';
-import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
+import 'package:ep_cf_operation/screen/home/bloc/home_feed_in_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_feed_consumption_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_mortality_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_weight_bloc.dart';
@@ -50,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen>
           builder: (_) => HomeWeightBloc(mixin: this),
           dispose: (_, value) => value.dispose(),
         ),
-        Provider<HomeFeedBloc>(
-          builder: (_) => HomeFeedBloc(),
+        Provider<HomeFeedInBloc>(
+          builder: (_) => HomeFeedInBloc(),
           dispose: (_, value) => value.dispose(),
         ),
         Provider<HomeFeedConsumptionBloc>(

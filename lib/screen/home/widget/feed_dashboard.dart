@@ -3,7 +3,7 @@ import 'package:ep_cf_operation/module/shares_preferences_module.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/feed_in/feed_in_screen.dart';
 import 'package:ep_cf_operation/screen/feed_in_history/feed_in_history_screen.dart';
-import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
+import 'package:ep_cf_operation/screen/home/bloc/home_feed_in_bloc.dart';
 import 'package:ep_cf_operation/widget/card_label_small.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class FeedDashboard extends StatefulWidget {
 class _FeedDashboardState extends State<FeedDashboard> {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomeFeedBloc>(context);
+    final bloc = Provider.of<HomeFeedInBloc>(context);
     bloc.loadCurrentFeedInList();
     return Stack(
       children: [
@@ -144,7 +144,7 @@ class CurrentFeedInList extends StatefulWidget {
 class _CurrentFeedInListState extends State<CurrentFeedInList> {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomeFeedBloc>(context);
+    final bloc = Provider.of<HomeFeedInBloc>(context);
     return StreamBuilder<List<CfFeedIn>>(
       stream: bloc.curFeedInListStream,
       builder: (context, snapshot) {

@@ -3,7 +3,7 @@ import 'package:ep_cf_operation/module/shares_preferences_module.dart';
 import 'package:ep_cf_operation/res/string.dart';
 import 'package:ep_cf_operation/screen/feed_consumption/feed_consumption_screen.dart';
 import 'package:ep_cf_operation/screen/feed_consumption_history/feed_consumption_history_screen.dart';
-import 'package:ep_cf_operation/screen/home/bloc/home_feed_bloc.dart';
+import 'package:ep_cf_operation/screen/home/bloc/home_feed_in_bloc.dart';
 import 'package:ep_cf_operation/screen/home/bloc/home_feed_consumption_bloc.dart';
 import 'package:ep_cf_operation/widget/card_label_small.dart';
 import 'package:ep_cf_operation/widget/simple_alert_dialog.dart';
@@ -122,7 +122,7 @@ class CurrentFeedConsumptionList extends StatefulWidget {
 class _CurrentFeedConsumptionListState extends State<CurrentFeedConsumptionList> {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<HomeFeedBloc>(context);
+    final bloc = Provider.of<HomeFeedConsumptionBloc>(context);
     return StreamBuilder<List<CfFeedConsumption>>(
       stream: bloc.curFeedConsumptionListStream,
       builder: (context, snapshot) {

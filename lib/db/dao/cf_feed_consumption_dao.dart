@@ -39,6 +39,7 @@ class CfFeedConsumptionDao {
     String recordStartDate,
     String recordEndDate,
     int houseNo,
+    String itemTypeCode,
     int isUpload,
     int isDelete = 0,
     String orderBy,
@@ -70,6 +71,10 @@ class CfFeedConsumptionDao {
     if (houseNo != null) {
       whereSql += "AND house_no = ? ";
       whereArgs.add(houseNo);
+    }
+    if (itemTypeCode != null) {
+      whereSql += "AND item_type_code = ? ";
+      whereArgs.add(itemTypeCode);
     }
     if (isUpload != null) {
       whereSql += "AND is_upload = ? ";

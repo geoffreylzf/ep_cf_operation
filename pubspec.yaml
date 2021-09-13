@@ -1,8 +1,9 @@
 name: ep_cf_operation
 description: A new Flutter application.
 
-version: 2.1.1+11
+version: 2.1.2+12
 
+#2.1.2+12 debug feed consumption listing and allow enter dif feed for same house same date
 #2.1.1+11 Modify home layout and allow backdate only 1 day
 #2.1.0+10 Add Feed Consumption
 #2.0.0+9 Remove google play
@@ -12,6 +13,7 @@ version: 2.1.1+11
 #1.1.0+5 Add weighing schedule
 #1.0.3+4 Change date entry allow 2 days only (today, yesterday), add mortality remark
 #1.0.1+2 Change mortality icon and remove google sign in
+
 
 environment:
   sdk: ">=2.8.0 <3.0.0"

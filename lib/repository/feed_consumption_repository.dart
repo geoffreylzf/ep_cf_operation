@@ -1,4 +1,3 @@
-
 import 'package:ep_cf_operation/db/dao/cf_feed_consumption_dao.dart';
 import 'package:ep_cf_operation/model/table/cf_feed_consumption.dart';
 import 'package:ep_cf_operation/model/upload_result.dart';
@@ -26,10 +25,10 @@ class FeedConsumptionRepository {
   }
 
   Future<List<CfFeedConsumption>> getSearchedList(
-      int houseNo,
-      String recordStartDate,
-      String recordEndDate,
-      ) async {
+    int houseNo,
+    String recordStartDate,
+    String recordEndDate,
+  ) async {
     final companyId = await SharedPreferencesModule().getCompanyId();
     final locationId = await SharedPreferencesModule().getLocationId();
 
@@ -49,6 +48,7 @@ class FeedConsumptionRepository {
       locationId: cfFeedConsumption.locationId,
       recordDate: cfFeedConsumption.recordDate,
       houseNo: cfFeedConsumption.houseNo,
+      itemTypeCode: cfFeedConsumption.itemTypeCode,
     );
 
     if (list.length == 0) {
